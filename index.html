@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name = "viewport" content = "width=device-width">
+    <title>Project 2</title>
+
+    <style>
+    </style>
+
+  </head>
+
+  <body>
+      <canvas></canvas>
+
+    <script>
+        let img = new Image();
+        img.src = "scottpilgrim_run.png"
+
+        let c = document.querySelector("canvas");
+
+        c.style.backgroundColor = "#4D3A81";
+        c.width = 500;
+        c.height = 500;
+        let ctx = c.getContext("2d");
+        let x = 0; 
+
+        //ctx.fillStyle = "#784284";
+        //ctx.fillStyle = "blue";
+        //ctx.beginPath();
+        //ctx.moveTo(108, 0.0);
+        //ctx.lineTo(141, 70);
+        //ctx.lineTo(218, 78.3);
+        //ctx.lineTo(162, 131);
+        //ctx.lineTo(175, 205);
+        //ctx.lineTo(108, 170);
+        //ctx.lineTo(41.2, 205);
+        //ctx.lineTo(55, 131);
+        //ctx.lineTo(1, 78);
+        //ctx.lineTo(75, 68);
+        //ctx.lineTo(108, 0);
+        //ctx.closePath();
+        //ctx.fill();
+
+      img.addEventListener("load", (event) =>{
+        //spirteH = img.height;
+        //spriteW = spirteH;
+
+        spirteH = img.height+9;
+        spriteW = spirteH-33;
+
+        ctx.drawImage(img, 0, 0, spriteW, spirteH, 0, 50, spriteW, spirteH);
+
+
+        ctx.drawImage(img, spriteW*1, 0, spriteW, spirteH, 300, 50, spriteW, spirteH);
+
+        console.log("done with drawImage");
+
+        draw();
+      });
+
+        let numImages = 8; 
+        let currentImageIndex = 0;
+        let frames = 0; 
+
+        let draw = () =>{
+          // clear the canvas
+          ctx.clearRect(0,0,c.width,c.height);
+          
+          // calculate and update vars
+          frames += 1;
+          x += 1;
+
+          // render
+
+          if(frames % 15 == 0)
+          {
+            
+          // calculate and update
+          currentImageIndex = (currentImageIndex == 7) ? 0 : currentImageIndex += 1;
+          
+          }
+
+
+          ctx.drawImage(img, spriteW*currentImageIndex, 0, spriteW, spirteH, x, 50, spriteW, spirteH);
+
+          window.requestAnimationFrame(draw);
+        }
+
+    </script>
+
+  </body>
+
+</html>
