@@ -27,8 +27,8 @@
         c.width = 500;
         c.height = 500;
         let ctx = c.getContext("2d");
-        let x = 0; 
-        let y = 0;
+        let x = -15; 
+        let y = 370;
 
         //ctx.fillStyle = "#784284";
         //ctx.fillStyle = "blue";
@@ -71,6 +71,22 @@
         let draw = () =>{
           // clear the canvas
           ctx.clearRect(0,0,c.width,c.height);
+          //ctx.fillStyle = "#784284";
+          //ctx.fillStyle = "blue";
+          //ctx.beginPath();
+          //ctx.moveTo(108, 0.0);
+          //ctx.lineTo(141, 70);
+          //ctx.lineTo(218, 78.3);
+          //ctx.lineTo(162, 131);
+          //ctx.lineTo(175, 205);
+          //ctx.lineTo(108, 170);
+          //ctx.lineTo(41.2, 205);
+          //ctx.lineTo(55, 131);
+          //ctx.lineTo(1, 78);
+          //ctx.lineTo(75, 68);
+          //ctx.lineTo(108, 0);
+          //ctx.closePath();
+          //ctx.fill();
           
           // calculate and update vars
           frames += 1;
@@ -95,26 +111,126 @@
         }
 
         const MOVEMENT_SPEED = 15;
+        const MOVEMENT_SPEED2 = 30;
 
         document.addEventListener("keydown", (event) => {
-          // Keyup
-          if(event.keyCode == 38){
-           y -= MOVEMENT_SPEED;
-          }
-          // Keydown
-          else if(event.keyCode == 40){
-            y += MOVEMENT_SPEED;
-          }
-          // Keyleft
-          if(event.keyCode == 39){
-            x += MOVEMENT_SPEED;
-          }
-          else if(event.keyCode == 37)
-          {
-            x -= MOVEMENT_SPEED;
-          }
+          // // Keyup
+          // if(event.keyCode == 38 || event.keyCode == 87){
+          //  y -= MOVEMENT_SPEED;
+          // }
+          // // Keydown
+          // else if(event.keyCode == 40 || event.keyCode == 83){
+          //   y += MOVEMENT_SPEED;
+          // }
+          // y = 350; 
 
-          console.log(event);
+
+
+          //console.log(y);
+          // Key left: Left Arrow Key and A key
+          //if(event.keyCode == 39 || event.keyCode == 68){
+          //  x += MOVEMENT_SPEED;
+          //}
+          //// Key Right: Right Arrow Key and D key
+          //else if(event.keyCode == 37 || event.keyCode == 65)
+          //{
+          //  x -= MOVEMENT_SPEED;
+          //}
+          function outOfBounds(x){
+            if(x < -15){
+                x = 0;
+              }
+              else if(x >= 500){
+                x = -15;
+            }
+          } 
+
+
+          switch(event.keyCode){
+            //UP Keys LISTED FIRST
+            // Left Arrow Key
+            case 39:
+              if(x >= 405){
+                x += -15;
+              }
+              else{
+                x+= MOVEMENT_SPEED;
+              }
+              
+              console.log("Pressed Right Arrow Key");
+              console.log(x);
+              break;
+
+            case 68:
+              if(x < -15){
+                x = 0;
+              }
+              else if(x >= 500){
+                x = -15;
+              }
+              else{
+                x+= MOVEMENT_SPEED;
+              }
+              console.log("Pressed D Key");
+              break;
+
+            case 37:
+              if(x < -15){
+                x = 0;
+              }
+              else if(x >= 500){
+                x = -15;
+              }
+              else{
+                x-= MOVEMENT_SPEED;
+              }
+              console.log("Pressed Left Arrow Key");
+              break;
+          
+            case 65:
+              if(x < -15){
+                x = 0;
+              }
+              else if(x >= 500){
+                x = 499;
+              }
+              else{
+                x-= MOVEMENT_SPEED;
+              }
+            console.log("Pressed A Key");
+            break;
+
+            case 32: 
+            if(y == 370){
+              y -= MOVEMENT_SPEED2;
+            }
+            console.log("Pressed Spacebar Key");
+            break;
+
+            default:
+              console.log("pressed a key that is not assigned anything...");
+                        // Making sure player does not exceed bounds of the canvas
+              if(x < -15){
+                x = 0;
+              }
+              else if(x >= 500){
+                x = -15;
+              }
+
+          }  
+          //console.log(event);
+
+        });
+
+        document.addEventListener("keyup", (event) => {
+            // Jumping Spacebar key
+            if(event.keyCode == 32){
+              if(y == 340){
+                y += MOVEMENT_SPEED2;
+              }
+              console.log(y);
+
+            } 
 
         });
 
